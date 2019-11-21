@@ -1,0 +1,26 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "My slick Nuxt.js project",
+  "author": "dxcr",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=dev nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.6.0",
+    "echarts": "^4.2.1",
+    "material-design-icons-iconfont": "^5.0.1",
+    "moment": "^2.24.0",
+    "nuxt": "^2.0.0",
+    "v-charts": "^1.19.0",
+    "v-echarts": "^1.0.2"
+  },
+  "devDependencies": {
+    "@mdi/font": "^4.3.95",
+    "@nuxtjs/vuetify": "^1.0.0"
+  }
+}
