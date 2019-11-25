@@ -1,9 +1,16 @@
 import colors from 'vuetify/es5/util/colors'
 import zhHans from 'vuetify/es5/locale/zh-Hans'
+
+let NODE_ENV = process.env.NODE_ENV
+
+let BASE_PATH = '/'
+if(NODE_ENV === 'generate'){
+  BASE_PATH = "./"
+}
 export default {
   mode: 'universal',
   /* 'process.env' is environment variable */
-  dev: process.env.NODE_ENV?true:false,
+  dev: NODE_ENV === 'dev'?true:false,
   /*
   ** Headers of the page
   */
@@ -108,6 +115,6 @@ export default {
     }
   },
   router: {
-    base: './'
+    base: BASE_PATH
   }
 }
