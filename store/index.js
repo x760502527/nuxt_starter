@@ -1,6 +1,12 @@
-import {getEquipment} from '@/services/apiService'
 export const state = () => ({
-  equipmentInfo: null
+  popupState: null,
+  layer:{
+    markers:true,
+    equipments:true,
+    pipelines:true,
+    alarms:true,
+    text:true,
+  }
 })
 
 export const getters = {
@@ -10,24 +16,24 @@ export const getters = {
 }
 
 export const mutations = {
-  increment (state) {
-    state.counter++
+  changePopupState (state,componentName) {
+    state.popupState = componentName
+  },
+  changeLayerById(state,obj){
+    state.layer[obj['id']] = obj['value']
+  },
+  changeLayer(state,obj){
+    state.layer = obj
+  },
+  changeLayerAll(state,boolean){
+    for(let item in state.layer){
+      state.layer[item] = boolean
+    }
   }
 }
 
 export const actions = {
   async getEquipment(context){
-    const data = await getEquipment()
-    const { channel,length,state,type } = data
-    this.channel = channel
 
-    let slideMax =  []
-    for (let i = 0; i < channel; i++) {
-      slideMax.push(i+1)
-    }
-    this.slideMax = slideMax
-    this.length = Math.round(length /1000) + 'km'
-    this.state = state
-    this.type = type
   }
 }

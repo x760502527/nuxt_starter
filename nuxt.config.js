@@ -10,7 +10,7 @@ if(NODE_ENV === 'generate'){
 export default {
   mode: 'universal',
   /* 'process.env' is environment variable */
-  dev: NODE_ENV === 'dev'?true:false,
+  dev: true,
   /*
   ** Headers of the page
   */
@@ -38,7 +38,8 @@ export default {
   css: [
     '@mdi/font/css/materialdesignicons.css',
     'vuetify/dist/vuetify.css',
-    'material-design-icons-iconfont/dist/material-design-icons.css'
+    'material-design-icons-iconfont/dist/material-design-icons.css',
+    'vue-cesium/lib/vc-navigation.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -47,7 +48,10 @@ export default {
     {src: '@/plugins/global', ssr: false},
     {src: '@/plugins/vcharts', ssr: false},
     {src: '@/plugins/moment', ssr: false},
+    {src: '@/plugins/cesium', ssr: false},
+    {src: '@/plugins/iview', ssr: false},
     {src: '@/plugins/themeUtil', ssr: true},
+    {src: '@/plugins/axios', ssr: true},
   ],
   /*
   ** Nuxt.js dev-modules
@@ -61,10 +65,9 @@ export default {
   modules: ['@nuxtjs/axios'],
   axios: {
     proxy: true, // Can be also an object with default options
-    baseURL: "http://localhost/"
   },
   proxy: {
-    '/api/': 'http://192.168.10.45:8888/',
+    '/api/': { target: 'http://192.168.10.147:7777/datacenter', pathRewrite: {'^/api/': ''} }
   },
   /*
   ** vuetify module configuration
@@ -80,7 +83,7 @@ export default {
       options: {
         customProperties: true,
       },
-      dark: false,
+      dark: true,
       themes: {
         dark: {
           primary: '#2A8CEF',
@@ -110,6 +113,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
+    transpile: ['vue-echarts', 'resize-detector'],
     extend(config, ctx) {
 
     }
