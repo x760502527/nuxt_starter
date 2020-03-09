@@ -2,13 +2,13 @@
     <div v-show="value">
         <div class="popup_container">
             <div class="popup_content">
-                <Tree @on-check-change="change" :data="items"  show-checkbox check-directly></Tree>
+                <Tree class="ivu-tree" @on-check-change="change" :data="items"  show-checkbox check-directly></Tree>
             </div>
-            <!--<div class="close" @click="close()">
-                <v-btn x-small text icon color="pink">
-                    <v-icon x-small>close</v-icon>
+            <div class="close" @click="close()">
+                <v-btn small text icon >
+                    <v-icon small>close</v-icon>
                 </v-btn>
-            </div>-->
+            </div>
         </div>
     </div>
 </template>
@@ -37,7 +37,6 @@
                     this.$store.commit('changeLayerAll',obj['checked'])
                     return
                 }
-                console.log(this.$store.state.layer)
                 this.$store.commit('changeLayerById',{id:obj['id'],value:obj['checked']})
             },
             close() {
@@ -108,6 +107,11 @@
         padding: 5px;
         border-bottom: 1px solid #ffffff;
     }
+    .close {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
 </style>
 <style lang="scss">
     .popup_container {
@@ -124,6 +128,10 @@
         color:#ffffff!important;
         background-color: rgba(0,0,0,0)!important;
     }
-
-
+    Tree{
+        display: block;
+    }
+    /*.ivu-tree ul{*/
+    /*    padding: 0px!important;*/
+    /*}*/
 </style>

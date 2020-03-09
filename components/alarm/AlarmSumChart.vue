@@ -1,6 +1,6 @@
 <template>
-    <div style="height: 100%;width: 100%">
-        <v-chart :options="chartOption" theme="theme"/>
+    <div style="height: 100%;width: 100%;padding: 10px" ref="container">
+        <v-chart ref="chart" autoresize class="echarts" :options="chartOption" theme="theme"/>
     </div>
 </template>
 
@@ -14,6 +14,15 @@
             data: {
                 default: ()=>([['', 0, 0, 0]])
             }
+        },
+        mounted(){
+            this.$nextTick(()=>{
+
+                // this.$refs['chart'].$el.children[0].style.height = this.$refs['container'].innerHeight + 'px'
+                // this.$refs['chart'].$el.children[0].style.width = this.$refs['container'].innerWidth + 'px'
+                // this.$refs['chart'].$el.children[0].style.width = '200px'
+                // this.$refs['chart'].$el.children[0].style.height = '200px'
+            })
         },
         computed: {
             chartOption() {
@@ -39,6 +48,7 @@
                     },
                     dataset: {
                         dimensions: ['product', 'DTS', 'DVS', 'DTSS'],
+                        // dimensions: ['product', 'DTSS', 'DTS', 'DVS'],
                         source: this.data
                     },
                     xAxis: {
@@ -50,7 +60,11 @@
                             lineStyle: {
                                 color: this._getColor()
                             }
-                        }
+                        },
+                        axisLabel: {
+                            show: true,
+                            interval:0,
+                        },
                     },
                     yAxis: {
                         name: '次数',
@@ -117,5 +131,6 @@
     .echarts {
         height: 100%;
         width: 100%;
+        display: block;
     }
 </style>

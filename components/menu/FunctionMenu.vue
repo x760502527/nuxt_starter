@@ -1,9 +1,12 @@
 <template>
     <div class="FunctionMenu">
         <div>
+            <div @click="clickHome()" class="btn_home"></div>
+        </div>
+        <div>
             <div @click="click('search')" class="btn_search"></div>
             <!-- popup -->
-            <search-popup  v-model="searchPopupPopupModel"></search-popup>
+            <search-popup @search="search"  v-model="searchPopupPopupModel"></search-popup>
         </div>
         <div>
             <div @click="click('layer')" class="btn_layer"></div>
@@ -15,7 +18,9 @@
             <!-- popup -->
             <target-popup class="popup" v-model="targetPopupModel"></target-popup>
         </div>
-
+<!--        <div>-->
+<!--            <div @click="click('target')" class="btn_choose"></div>-->
+<!--        </div>-->
     </div>
 </template>
 
@@ -33,6 +38,14 @@
                     return
                 }
                 this.$store.commit('changePopupState', name)
+            },
+            clickHome(){
+                this.$emit('setMapCenter')
+                this.$store.commit('setTarget', null)
+                this.$store.commit('changePopupState', "")
+            },
+            search(ob){
+                this.$emit('search',ob)
             }
         },
         computed: {
@@ -57,8 +70,8 @@
 
 <style lang="scss" scoped>
     %btn {
-        width: 49px;
-        height: 41px;
+        width: 37px;
+        height: 37px;
         background-size: 100% 100%;
         margin-top:5px;
         cursor: pointer;
@@ -70,20 +83,24 @@
     }
 
     .popup{
-        margin-top: -41px;
+        margin-top: -36px;
         margin-left: 52px;
         position: absolute;
     }
     .btn_search{
         @extend %btn;
-        background-image: url("/images/index_09.png");
+        background-image: url("/images/icon_06.png");
     }
     .btn_layer{
         @extend %btn;
-        background-image: url("/images/index_13.png");
+        background-image: url("/images/icon_10.png");
     }
     .btn_choose{
         @extend %btn;
-        background-image: url("/images/index_11.png");
+        background-image: url("/images/icon_08.png");
+    }
+    .btn_home{
+        @extend %btn;
+        background-image: url("/images/icon_home.png");
     }
 </style>

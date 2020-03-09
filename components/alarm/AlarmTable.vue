@@ -5,45 +5,35 @@
     min-height: 100%;">
         <div class="table">
             <v-row class="tr" no-gutters>
-                <v-col class="td">报警级别</v-col>
-                <v-col class="td">详情</v-col>
-                <v-col class="td">时间</v-col>
+                <v-col cols="3" class="td">级别</v-col>
+                <v-col cols="3" class="td">管道位置（米）</v-col>
+                <v-col cols="6" class="td">时间</v-col>
             </v-row>
-            <v-row class="tr" no-gutters>
-                <v-col class="td">温度一级</v-col>
-                <v-col class="td">管道100米处</v-col>
+            <v-row class="tr" no-gutters v-for="(item,index) in data" :key="index">
+                <v-col cols="3" class="td">{{item['type']}}</v-col>
+                <v-col cols="3" class="td">{{item['ppLoc']}}</v-col>
+                <v-col cols="6" class="td">{{item['time']}}</v-col>
+                <!-- <v-col cols="3" class="td">{{item['levelId']}}</v-col>
+                <v-col cols="3" class="td">{{item['pipelineLocation']}}</v-col>
+                <v-col cols="6" class="td">{{item['alarmTime']}}</v-col> -->
             </v-row>
-            <v-row class="tr" no-gutters>
-                <v-col class="td">温度二级</v-col>
-                <v-col class="td">管道100米处</v-col>
-            </v-row>
-            <v-row class="tr" no-gutters>
-                <v-col class="td">震动一级</v-col>
-                <v-col class="td">管道100米处</v-col>
-            </v-row>
-            <v-row class="tr" no-gutters>
-                <v-col class="td">震动一级</v-col>
-                <v-col class="td">管道100米处</v-col>
-            </v-row>
-            <v-row class="tr" no-gutters>
-                <v-col class="td">震动一级</v-col>
-                <v-col class="td">管道100米处</v-col>
-            </v-row>
-            <v-row class="tr" no-gutters>
-                <v-col class="td">震动一级</v-col>
-                <v-col class="td">管道100米处</v-col>
-            </v-row>
-            <v-row class="tr" no-gutters>
-                <v-col class="td">震动一级</v-col>
-                <v-col class="td">管道100米处</v-col>
-            </v-row>
+            <div class="tr none" v-if="data.length<1">
+                暂无数据
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "AlarmTable"
+        name: "AlarmTable",
+        props: {
+            data: {
+                default: () => (
+                    []
+                )
+            }
+        },
     }
 </script>
 <style lang="scss" scoped>
@@ -55,11 +45,21 @@
     }
     .td{
         text-align: center;
+        padding:0 4px;
     }
     .tr{
-        height: 40px;
-        line-height: 40px;
+        min-height: 40px;
         text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .none{
+        height: calc(100% - 70px);
+        color:#aaaaaa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 </style>
 <style lang="scss">

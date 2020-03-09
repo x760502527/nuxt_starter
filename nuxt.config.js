@@ -3,14 +3,13 @@ import zhHans from 'vuetify/es5/locale/zh-Hans'
 
 let NODE_ENV = process.env.NODE_ENV
 
-let BASE_PATH = '/'
+let BASE_PATH = ''
 if(NODE_ENV === 'generate'){
   BASE_PATH = "./"
 }
 export default {
   mode: 'universal',
   /* 'process.env' is environment variable */
-  dev: true,
   /*
   ** Headers of the page
   */
@@ -36,10 +35,11 @@ export default {
   ** Global CSS
   */
   css: [
+    'vue-cesium/lib/vc-navigation.css',
     '@mdi/font/css/materialdesignicons.css',
     'vuetify/dist/vuetify.css',
     'material-design-icons-iconfont/dist/material-design-icons.css',
-    'vue-cesium/lib/vc-navigation.css'
+    'view-design/dist/styles/iview.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -49,9 +49,9 @@ export default {
     {src: '@/plugins/vcharts', ssr: false},
     {src: '@/plugins/moment', ssr: false},
     {src: '@/plugins/cesium', ssr: false},
-    {src: '@/plugins/iview', ssr: false},
     {src: '@/plugins/themeUtil', ssr: true},
     {src: '@/plugins/axios', ssr: true},
+    {src: '@/plugins/iview', ssr: false},
   ],
   /*
   ** Nuxt.js dev-modules
@@ -67,7 +67,7 @@ export default {
     proxy: true, // Can be also an object with default options
   },
   proxy: {
-    '/api/': { target: 'http://192.168.10.147:7777/datacenter', pathRewrite: {'^/api/': ''} }
+    '/api/': { target: 'http://192.168.10.147:8080/datacenter', pathRewrite: {'^/api/': ''} }
   },
   /*
   ** vuetify module configuration
@@ -114,9 +114,6 @@ export default {
     ** You can extend webpack config here
     */
     transpile: ['vue-echarts', 'resize-detector'],
-    extend(config, ctx) {
-
-    }
   },
   router: {
     base: BASE_PATH

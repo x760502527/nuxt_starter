@@ -1,6 +1,6 @@
 <template>
-    <div style="height: 100%;width: 100%">
-        <v-chart ref="echart" :options="chartOption" theme="theme"/>
+    <div style="height: 100%;width: 100%;padding: 10px">
+        <v-chart autoresize class="echart" :options="chartOption" theme="theme"/>
     </div>
 </template>
 
@@ -14,11 +14,7 @@
             data: {
                 default: ()=>(
                     [
-                        ['product', '当前在线率','最大在线率'],
-                        ['西北', 1,100],
-                        ['西南', 5,100],
-                        ['华北', 10,100],
-                        ['华南', 50,100],
+
                     ]
                 )
             }
@@ -35,7 +31,8 @@
                         }
                     },
                     dataset: {
-                        dimensions: ['product', '当前在线率','最大在线率'],
+                        dimensions: ['product', '当前在线率','最高在线率'],
+                        // dimensions: ['product', '当前在线率'],
                         source: this.data
                     },
                     xAxis: [
@@ -43,6 +40,10 @@
                             type: 'category',
                             axisTick:{
                                 show:false
+                            },
+                            axisLabel: {
+                                show: true,
+                                interval:0,
                             },
                             axisLine: {
                                 lineStyle: {
@@ -106,5 +107,6 @@
     .echarts{
         height: 100%;
         width: 100%;
+        display: block;
     }
 </style>

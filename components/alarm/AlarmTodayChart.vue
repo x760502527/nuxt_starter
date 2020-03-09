@@ -1,6 +1,6 @@
 <template>
-    <div style="height: 100%;width: 100%">
-        <v-chart :options="chartOption" theme="theme"/>
+    <div style="height: 100%;width: 100%;padding: 10px">
+        <v-chart autoresize class="echarts" :options="chartOption" theme="theme"/>
     </div>
 </template>
 
@@ -90,5 +90,6 @@
     .echarts{
         height: 100%;
         width: 100%;
+        display: block;
     }
 </style>

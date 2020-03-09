@@ -6,7 +6,8 @@ export const state = () => ({
     pipelines:true,
     alarms:true,
     text:true,
-  }
+  },
+  target:null
 })
 
 export const getters = {
@@ -29,6 +30,9 @@ export const mutations = {
     for(let item in state.layer){
       state.layer[item] = boolean
     }
+  },
+  setTarget(state,obj){
+    state.target  =obj
   }
 }
 
