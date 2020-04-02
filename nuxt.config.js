@@ -35,6 +35,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/css/index.scss',
     'vue-cesium/lib/vc-navigation.css',
     '@mdi/font/css/materialdesignicons.css',
     'vuetify/dist/vuetify.css',
