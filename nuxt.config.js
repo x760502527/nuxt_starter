@@ -83,7 +83,7 @@ export default {
       options: {
         customProperties: true,
       },
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: '#2A8CEF',
