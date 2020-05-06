@@ -19,12 +19,7 @@ let apiService = {
         })
     },
     configJson(){
-        return new Promise((resolve, reject) => {
-            axios.get( `/config.json`).then((value => {
-                let datas = value['data']
-                resolve(datas)
-            }))
-        })
+        return process.env.properties
     },
     login(params){
         return new Promise((resolve, reject) => {

@@ -2,6 +2,7 @@ import colors from 'vuetify/es5/util/colors'
 import zhHans from 'vuetify/es5/locale/zh-Hans'
 
 let NODE_ENV = process.env.NODE_ENV
+let NODE_HTTP = process.env.NODE_HTTP
 
 let BASE_PATH = ''
 if (NODE_ENV === 'generate') {
@@ -73,7 +74,7 @@ export default {
     },
     proxy: {
         '/api/': {target: 'http://192.168.10.147:8080', pathRewrite: {'^/api/': ''}},
-        '/api1/': {target: 'http://172.30.0.186:8080', pathRewrite: {'^/api1/': ''}},
+        '/api1/': {target: NODE_HTTP, pathRewrite: {'^/api1/': ''}},
         '/api2/': {target: 'http://192.168.10.147:8080/bigScreen', pathRewrite: {'^/api2/': ''}},
     },
     /*

@@ -629,8 +629,8 @@
                 const datas = await apiService.baidu()
             },
             async getConfig() {
-                const datas = await apiService.configJson()
-                this.address_back = datas['properties']['address_back']
+                const datas = apiService.configJson()
+                this.address_back = datas['address_back']
             },
             async getRtData() {
                 let interval = parseInt(this.pipeline['pipelineLength'] / 1000)
