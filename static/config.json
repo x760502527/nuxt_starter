@@ -1,0 +1,6 @@
+{
+  "properties": {
+    "address_back": "http://192.168.10.147:8080/WebFrames",
+    "address_around": "http://192.168.10.147"
+  }
+}

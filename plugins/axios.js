@@ -1,3 +1,6 @@
+import Vue from 'vue'
+Vue.use(require('vue-cookie'))
+
 export default function ({ $axios, redirect }) {
     $axios.onRequest(config => {
         console.log('Making request to ' + config.url)

@@ -1,43 +1,44 @@
+const cookieparser = require('cookieparser')
+import apiService from '@/services/apiService'
 export const state = () => ({
-  popupState: null,
-  layer:{
-    markers:true,
-    equipments:true,
-    pipelines:true,
-    alarms:true,
-    text:true,
-  },
-  target:null
+  user:null,
+  token:null,
 })
 
 export const getters = {
-  getEquipmentInfo(){
 
-  }
 }
 
 export const mutations = {
-  changePopupState (state,componentName) {
-    state.popupState = componentName
+  user(state,ob){
+    state.user = ob
   },
-  changeLayerById(state,obj){
-    state.layer[obj['id']] = obj['value']
-  },
-  changeLayer(state,obj){
-    state.layer = obj
-  },
-  changeLayerAll(state,boolean){
-    for(let item in state.layer){
-      state.layer[item] = boolean
-    }
-  },
-  setTarget(state,obj){
-    state.target  =obj
+  token(state,ob){
+    state.token = ob
   }
 }
 
 export const actions = {
-  async getEquipment(context){
+  nuxtServerInit ({ commit , dispatch}, { req }) {
+    //验证mac
+    // dispatch('core/load')
 
+    //登录赋值
+    let token = null
+    let user = null
+    if (req.headers.cookie) {
+      const parsed = cookieparser.parse(req.headers.cookie)
+      try {
+        token = parsed.token
+        user = JSON.parse(parsed.user)
+      } catch (err) {
+        // No valid cookie found
+      }
+      commit('token', token)
+      commit('user', user)
+    }
+  },
+  async checkMac({commit}){
+    let data = await apiService.checkMac()
   }
 }

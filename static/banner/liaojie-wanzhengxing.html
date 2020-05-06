@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>完整性管理</title>
+    <link rel="icon" type="image/x-icon" href="/images/logn_icon.ico">
+
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/animate.min.css">
+<script src="js/swiper.min.js"></script>
+<script src="js/swiper.animate.min.js"></script>
+    <link rel="stylesheet" href="css/brands.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/liaojie-detail.css">
+
+</head>
+
+<body class="body">
+<div  class="nav-back-wrap">
+    <a class="nav-back" href="/banner/index.html">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <i class="fa fa-angle-double-left"></i>返回
+    </a>
+</div>
+<div class="top-nav">
+    <span>完整性管理</span>
+</div>
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <!-------------slide4----------------->
+        <section class="swiper-slide swiper-slide4">
+            <div class="anli" style="width: 70%">
+                <ul>
+                    <li style="width: 33%" class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration=".5s" swiper-animate-delay="0" >
+                        <p class="p1">
+                            <span>
+                                <img src="images/ljie12.png"></span></p>
+                        <p class="p2"><span class="s1">数据采集</span><br><span class="s2">明确管道全生命周期不同阶段需采集数据得种类和属性，并按照源头采集的原则进行采集。</span></p>
+                    </li>
+                    <li style="width: 33%" class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration=".5s" swiper-animate-delay="0.2s" >
+                        <p class="p1">
+                            <span>
+                                <img src="images/ljie13.png"></span></p>
+                        <p class="p2"><span class="s1">高后果区识别</span><br><span class="s2">高后果区识别工作由熟悉管道沿线情况的人员进行，识别人员应参加有关培训。</span></p>
+                    </li>
+                    <li style="width: 33%" class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration=".5s" swiper-animate-delay="0.4s" >
+                        <p class="p1">
+                            <span>
+                                <img src="images/ljie14.png"></span></p>
+                        <p class="p2"><span class="s1">风险评价</span><br><span class="s2">风险评价基于评价目标，结合现有数据的完整程度以及经济投入等因素，选择使用的评价方法。</span></p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-------------slide4----------------->
+        <section class="swiper-slide swiper-slide4">
+            <div class="anli" style="width: 70%">
+                <ul>
+                    <li style="width: 33%" class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration=".5s" swiper-animate-delay="0" >
+                        <p class="p1">
+                            <span>
+                                <img src="images/ljie12.png"></span></p>
+                        <p class="p2"><span class="s1">完整性评价</span><br><span class="s2">完整性评价根据管道失效的历史和风险评价的结果选择适用的检测内容和技术指标。</span></p>
+                    </li>
+                    <li style="width: 33%" class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration=".5s" swiper-animate-delay="0.2s" >
+                        <p class="p1">
+                            <span>
+                                <img src="images/ljie13.png"></span></p>
+                        <p class="p2"><span class="s1">维修维护 </span><br><span class="s2">根据高后果区识别结果、风险评价和完整性评价等结论与建议制定管道巡护方案，明确巡护的内容、频次和重点关注位置，高后果区应作为巡护的重点段。</span></p>
+                    </li>
+                    <li style="width: 33%" class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration=".5s" swiper-animate-delay="0.4s" >
+                        <p class="p1">
+                            <span>
+                                <img src="images/ljie14.png"></span></p>
+                        <p class="p2"><span class="s1">效能评价</span><br><span class="s2">对失效进行分析，包括泄漏、管体不可接受缺陷、对管道安全造成影响的周边环境变化或附属设施损坏以及其他造成重大经济损失的情况等。</span></p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+
+
+    </div>
+
+  <div class="swiper-pagination"></div>
+</div>
+
+
+<script>
+
+scaleW=window.innerWidth/320;
+scaleH=window.innerHeight/480;
+var resizes = document.querySelectorAll('.resize');
+          for (var j=0; j<resizes.length; j++) {
+           resizes[j].style.width=parseInt(resizes[j].style.width)*scaleW+'px';
+		   resizes[j].style.height=parseInt(resizes[j].style.height)*scaleH+'px';
+		   resizes[j].style.top=parseInt(resizes[j].style.top)*scaleH+'px';
+		   resizes[j].style.left=parseInt(resizes[j].style.left)*scaleW+'px';
+          }
+
+  var mySwiper = new Swiper ('.swiper-container', {
+   direction : 'vertical',
+   pagination: '.swiper-pagination',
+  //virtualTranslate : true,
+   mousewheelControl : true,
+      paginationClickable: true,
+   onInit: function(swiper){
+   swiperAnimateCache(swiper);
+   swiperAnimate(swiper);
+	  },
+   onSlideChangeEnd: function(swiper){
+	swiperAnimate(swiper);
+    },
+	onTransitionEnd: function(swiper){
+	swiperAnimate(swiper);
+    },
+
+
+	watchSlidesProgress: true,
+
+      onProgress: function(swiper){
+        for (var i = 0; i < swiper.slides.length; i++){
+          var slide = swiper.slides[i];
+          var progress = slide.progress;
+          var translate = progress*swiper.height/4;
+		  scale = 1 - Math.min(Math.abs(progress * 0.5), 1);
+          var opacity = 1 - Math.min(Math.abs(progress/2),0.5);
+          slide.style.opacity = opacity;
+		  es = slide.style;
+		  es.webkitTransform = es.MsTransform = es.msTransform = es.MozTransform = es.OTransform = es.transform = 'translate3d(0,'+translate+'px,-'+translate+'px) scaleY(' + scale + ')';
+
+        }
+      },
+
+	   onSetTransition: function(swiper, speed) {
+        for (var i = 0; i < swiper.slides.length; i++){
+          es = swiper.slides[i].style;
+		  es.webkitTransitionDuration = es.MsTransitionDuration = es.msTransitionDuration = es.MozTransitionDuration = es.OTransitionDuration = es.transitionDuration = speed + 'ms';
+
+        }
+      },
+	   })
+  </script>
+</body>
+</html>

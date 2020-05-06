@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import { Tree } from 'view-design';
-
-Vue.component('Tree', Tree);
+import ViewUI from 'view-design';
+Vue.use(ViewUI);
 // import 'view-design/dist/styles/iview.css';

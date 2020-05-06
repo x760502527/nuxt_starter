@@ -1,3 +1,122 @@
-html{
-  overflow: auto!important;
+html {
+  overflow: auto !important;
 }
+
+.v-application--wrap {
+  .col {
+    padding: 0;
+  }
+}
+
+.list_title{
+  color: rgb(0,187,231);
+  text-align: center;
+  font-size: 24px;
+  margin: 20px auto 0px auto;
+  width: 355px;
+  background-image: url("/images/biaoti.png");
+  background-size: 100% 100%;
+}
+
+.dxcr_label {
+  color: rgb(7, 175, 226);
+}
+
+.dxcr_select {
+
+}
+
+.dxcr_index {
+  position: relative;
+}
+
+.dxcr_input input {
+  background: rgb(12, 55, 87);
+  border: 1px solid rgb(11, 58, 104);
+  color: #fff;
+}
+
+.margin-left-20 {
+  margin-left: 20px;
+}
+
+.dxcr_op {
+  float: left;
+  margin-left: 20px;
+}
+
+.el-input {
+  width: 140px !important;
+}
+
+.el-range-editor {
+  width: 360px !important;
+  background: rgb(12, 55, 87)!important;
+  border: 1px solid rgb(4, 81, 100) !important;
+}
+.el-range-separator{
+  color: #fff!important;
+}
+.el-range-input{
+  color:#fff!important;
+}
+
+.el-table {
+  background: transparent !important;
+  color: rgb(2, 221, 216) !important;
+  border: 1px solid rgb(4, 81, 100) !important;
+
+  &::before {
+    height: 0 !important;
+  }
+
+  thead {
+    color: rgb(2, 221, 216) !important;
+  }
+
+  th {
+    background: transparent !important;
+    border: 1px dashed rgb(4, 81, 100) !important;
+    text-align: center!important;
+  }
+
+  td {
+    border-right: none;
+    background: transparent !important;
+    border: 1px dashed rgb(4, 81, 100) !important;
+  }
+
+  tr {
+    background: transparent !important;
+  }
+}
+
+.el-pagination {
+  .btn-prev {
+    color:#fff!important;
+    background-color: transparent!important;
+  }
+  .number{
+    color:#fff!important;
+    background-color: transparent!important;
+    &:hover{
+      color:#409EFF!important;
+    }
+  }
+  .btn-next{
+    color:#fff!important;
+    background-color: transparent!important;
+  }
+  .more{
+    color:#fff!important;
+    background-color: transparent!important;
+  }
+  .active{
+    color:#409EFF!important;
+  }
+  .el-pagination__total{
+    color:#fff!important;
+  }
+}
+
+

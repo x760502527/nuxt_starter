@@ -1,0 +1,406 @@
+*{
+    margin:0;
+    padding:0;
+}
+html,body{
+    height:100%;
+}
+body{
+    font-family:"microsoft yahei";
+}
+.swiper-container {
+    /*  width: 320px;
+      height: 480px;*/
+    width: 100%;
+    height: 100%;
+
+}
+
+.swiper-slide{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    -webkit-align-items:center;
+    -webkit-justify-content:center;
+}
+img{
+    display:block;
+}
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    opacity: .8;
+    background: transparent;
+    border: 1px solid #00ffcc;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #00ffcc;
+}
+@-webkit-keyframes start {
+    0%,30% {opacity: 0;-webkit-transform: translate(0,10px);}
+    60% {opacity: 1;-webkit-transform: translate(0,0);}
+    100% {opacity: 0;-webkit-transform: translate(0,-8px);}
+}
+@-moz-keyframes start {
+    0%,30% {opacity: 0;-moz-transform: translate(0,10px);}
+    60% {opacity: 1;-moz-transform: translate(0,0);}
+    100% {opacity: 0;-moz-transform: translate(0,-8px);}
+}
+@keyframes start {
+    0%,30% {opacity: 0;transform: translate(0,10px);}
+    60% {opacity: 1;transform: translate(0,0);}
+    100% {opacity: 0;transform: translate(0,-8px);}
+}
+.ani{
+    position:absolute;
+}
+.txt{
+    position:absolute;
+}
+#array{
+    position:absolute;z-index:999;-webkit-animation: start 1.5s infinite ease-in-out;
+}
+.ys{ text-align: center; font-size: 3em; display: block; width: 100%; max-height: 5em; font-family: Arial; font-weight: bold; color: #939393; }
+.body{background: url("../images/chanpin-bg.png") no-repeat ;background-size: 100% 100%;}
+.top-nav{ background: url("../images/top-bg.png") no-repeat center center;height: 132px;width: 100%;text-align: center;position: fixed; }
+.top-nav span{display: inline-block; font-size: 28px;color: #fff;text-shadow:.2rem 0rem .5rem #205efd,-.2rem 0rem .5rem #205efd,0rem .2rem .5rem #205efd,0rem -.2rem .5rem #205efd;line-height: 132px;}
+
+.gongneng ul,.gongneng ul li{list-style:none;}
+.gongneng{width: 90%; margin-top: 100px;}
+.gongneng ul li{float: left; text-align: center;}
+.gongneng ul li:nth-child(2n+1){width:24%;}
+.gongneng ul li:nth-child(2n+1) .p1{position: relative;width: 320px;height: 320px; text-align: center;margin: 10px auto;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s}
+.gongneng ul li:nth-child(2n+1) .p1 span{width: 320px;height: 320px;overflow: hidden;display: block;border-radius: 160px;}
+.gongneng ul li:nth-child(2n+1) .p1 img{width: 320px;height: 320px;border-radius: 160px;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s}
+.gongneng ul li:nth-child(2n+1) .p1:after{content:'';width: 330px;
+    position: absolute;
+    top: -5px; bottom: -5px;
+    left: -5px; right: -5px;
+    background: linear-gradient(135deg,#fff, #18cde2);
+    border-radius: 175px;
+    z-index:-1;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s}
+.gongneng ul li:hover .p1 img{
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -o-transform:scale(1.5);
+    transform:scale(1.5)}
+.gongneng ul li:hover .p1:after{
+    -webkit-transform: rotate(160deg);
+    -moz-transform: rotate(160deg);
+    -o-transform:rotate(160deg);
+    transform:rotate(160deg);
+
+
+}
+
+
+.gongneng ul li:nth-child(2n+1) .p2{width:80%;-webkit-transition: all 0.5s;margin: 50px auto;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s}
+.gongneng ul li:nth-child(2n+1) .p2 span{color: #fff;font-weight: lighter;cursor: default;overflow: hidden;
+}
+.gongneng ul li:nth-child(2n+1) .p2 .s1{font-size: 45px;padding-bottom: 10px;height: 70px;line-height: 70px;display: inline-block;position: relative;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;}
+.gongneng ul li:hover .p2 span.s1{    font-size: 46px; color: #00e3ff ;
+}
+.gongneng ul li:nth-child(2n+1) .p2 span.s1:after{
+    content:'';
+    position: absolute;
+    width: 100%;
+    bottom:0;
+    height: 3px;
+    background: #00e3ff;
+    left:-100%;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s
+}
+.gongneng ul li:hover .p2 span.s1:after{
+    left: 0;
+}
+
+
+.gongneng ul li:nth-child(2n+1) .p2 .s2{font-size: 18px;}
+.gongneng ul li:nth-child(2n){width:14%;text-align: center}
+.gongneng ul li:nth-child(2n) img{margin-top: 130px;display: inline-block;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s}
+.gongneng ul li:nth-child(2n):hover img{
+    -webkit-transform: rotate(160deg);
+    -moz-transform: rotate(160deg);
+    -o-transform:rotate(160deg);
+    transform:rotate(160deg);
+}
+.ani{position: relative;}
+
+.youshi{width: 90%; margin-top: 100px;}
+.youshi ul li{width: 33%;float: left; list-style: none}
+.youshi ul li.li1,.youshi ul li.li3{width: 30%}
+.youshi ul li.li1 p.p1{margin-bottom:250px;}
+.youshi ul li.li1 p{width:80%;-webkit-transition: all 0.5s;margin: 50px auto;text-align: right;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s}
+.youshi ul li.li1 p span{color: #fff;font-weight: lighter;cursor: default;overflow: hidden;
+}
+.youshi ul li.li1 p .s1{font-size: 45px;padding-bottom: 10px;height: 70px;line-height: 70px;display: inline-block;position: relative;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;}
+.youshi ul li.li1 p:hover span.s1{    font-size: 46px; color: #00e3ff ;}
+.youshi ul li.li1 p span.s1:after{
+    content:'';
+    position: absolute;
+    width: 100%;
+    bottom:0;
+    height: 3px;
+    background: #00e3ff;
+    left:-100%;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s
+}
+.youshi ul li.li1 p:hover span.s1:after{
+    left: 0;
+}
+
+
+.youshi ul li.li1 p .s2{font-size: 18px;}
+
+.youshi ul li.li2{position: relative;width: 40%;height: 500px;}
+.youshi ul li.li2 div{position: absolute;}
+.youshi ul li.li2 p{position: relative;width: 230px;height: 230px; text-align: center;margin: 10px auto;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s}
+.youshi ul li.li2 p span{width: 230px;height: 230px;overflow: hidden;display: block;border-radius: 30px;}
+.youshi ul li.li2 p img{width: 230px;height: 230px;border-radius: 30px;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s}
+.youshi ul li.li2 p:after{content:'';width: 240px;
+    position: absolute;
+    top: -5px; bottom: -5px;
+    left: -5px; right: -5px;
+    background: linear-gradient(135deg,#fff, #18cde2);
+    border-radius: 33px;
+    z-index:-1;
+}
+.youshi ul li.li2 div:hover p img{
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -o-transform:scale(1.5);
+    transform:scale(1.5)}
+.youshi ul li.li2 .div1{left: 50%;margin-left: -130px;top:0;
+
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform:rotate(45deg);
+    transform:rotate(45deg)
+}
+.youshi ul li.li2 .div4{left: 50%;margin-left: -130px;top:350px;
+
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform:rotate(45deg);
+    transform:rotate(45deg)
+}
+.youshi ul li.li2 .div3{
+    left:30px;top:175px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform:rotate(45deg);
+    transform:rotate(45deg)
+}
+.youshi ul li.li2 .div2{
+    right:60px;top:175px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform:rotate(45deg);
+    transform:rotate(45deg)
+}
+.youshi ul li.li3 p{text-align: left;}
+
+.anli ul,.anli ul li{list-style:none;}
+.anli{width: 90%; margin-top: 100px;}
+.anli ul li{float: left; text-align: center;}
+.anli ul li{width:25%;}
+.anli ul li .p1{position: relative;width: 320px;height: 320px; text-align: center;margin: 10px auto;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s}
+.anli ul li .p1 span{width: 320px;height: 320px;overflow: hidden;display: block;}
+.anli ul li .p1 img{width: 320px;height: 320px;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s}
+.anli ul li .p1:after{content:'';width: 330px;
+    position: absolute;
+    top: -5px; bottom: -5px;
+    left: -5px; right: -5px;
+    background: linear-gradient(135deg,#fff, #18cde2);
+    z-index:-1;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s}
+.anli ul li:hover .p1 img{
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -o-transform:scale(1.5);
+    transform:scale(1.5)}
+.anli ul li:hover .p1:after{
+    background: linear-gradient(360deg,#fff, #18cde2);
+}
+
+
+.anli ul li .p2{width:80%;-webkit-transition: all 0.5s;margin: 50px auto;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s}
+.anli ul li .p2 span{color: #fff;font-weight: lighter;cursor: default;overflow: hidden;
+}
+.anli ul li .p2 .s1{font-size: 45px;padding-bottom: 10px;height: 70px;line-height: 70px;display: inline-block;position: relative;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;}
+.anli ul li:hover .p2 span.s1{    font-size: 46px; color: #00e3ff ;
+}
+.anli ul li .p2 span.s1:after{
+    content:'';
+    position: absolute;
+    width: 100%;
+    bottom:0;
+    height: 3px;
+    background: #00e3ff;
+    left:-100%;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s
+}
+.anli ul li:hover .p2 span.s1:after{
+    left: 0;
+}
+
+
+.anli ul li .p2 .s2{font-size: 18px;}
+.nav-back-wrap{position: fixed;left:20px;
+    top:20px;height:30px; width: 70px;z-index: 9999}
+.nav-back{text-decoration: none; position: relative;height:30px; color:#08dbe3;line-height: 30px;width: 70px;text-align: center;font-size: 12px;overflow: hidden;cursor: pointer;display: inline-block;z-index: 1000}
+.nav-back:hover {
+    background: transparent;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4,
+    0 0 25px #03e9f4;
+}
+.nav-back i{font-size: 18px; margin-right: 5px;color:#08dbe3;}
+.nav-back span {
+    position: absolute;
+    display: block;
+}
+
+.nav-back span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #03e9f4);
+    animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+    0% {
+        left: -100%;
+    }
+    50%,100% {
+        left: 100%;
+    }
+}
+
+.nav-back span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #03e9f4);
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: .25s
+}
+
+@keyframes btn-anim2 {
+    0% {
+        top: -100%;
+    }
+    50%,100% {
+        top: 100%;
+    }
+}
+
+.nav-back span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #03e9f4);
+    animation: btn-anim3 1s linear infinite;
+    animation-delay: .5s
+}
+
+@keyframes btn-anim3 {
+    0% {
+        right: -100%;
+    }
+    50%,100% {
+        right: 100%;
+    }
+}
+
+.nav-back span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #03e9f4);
+    animation: btn-anim4 1s linear infinite;
+    animation-delay: .75s
+}
+
+@keyframes btn-anim4 {
+    0% {
+        bottom: -100%;
+    }
+    50%,100% {
+        bottom: 100%;
+    }
+}

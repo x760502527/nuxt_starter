@@ -1,0 +1,89 @@
+%!Adobe-FontList 1.20
+%Locale:0x804
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Invalid
+OutlineFileName:E:\myworks\banner\jquerylbtswiper\Font\shangfang-webfont.woff
+FileModTime:1586815128
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Invalid
+OutlineFileName:E:\myworks\banner\jquerylbtswiper\Font\shangfang-webfont.woff2
+FileModTime:1586815128
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Invalid
+OutlineFileName:E:\myworks\banner\jquerylbtswiper\Font\shangfang.eot
+FileModTime:1586858789
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:SSFangYuanTi
+FamilyName:N
+櫀e筗OS
+StyleName:Regular
+FullName:SS FangYuanTi
+MenuName:SS FangYuanTi
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:E:\myworks\banner\jquerylbtswiper\Font\shangfang.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:3222368
+FileModTime:1586858775
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,SS FangYuanTi
+NameArray:0,Win,1,SS FangYuanTi
+NameArray:0,Win,16,N
+櫀e筗OS
+NameArray:25,Win,1,上首方圆体
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Invalid
+OutlineFileName:E:\myworks\banner\jquerylbtswiper\Font\shangfang.svg
+FileModTime:1586858814
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:SSFangYuanTi
+FamilyName:SSFangYuanTi
+StyleName:Regular
+FullName:SS FangYuanTi
+MenuName:上首方圆体
+StyleBits:0
+FamilyNameNative:上首方圆体
+StyleNameNative:Regular
+FullNameNative:上首方圆体
+WritingScript:SimplifiedChinese
+OutlineFileName:E:\myworks\banner\jquerylbtswiper\Font\shangfang.ttf
+DataFormat:sfntData
+hasSVG:no
+VariableFontType:NonVariableFont
+FileLength:2104752
+FileModTime:1569380016
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,SS FangYuanTi
+NameArray:0,Win,1,SS FangYuanTi
+NameArray:0,Win,16,N
+櫀e筗OS
+NameArray:25,Win,1,上首方圆体
+%EndFont
+

@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>基础信息</title>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/>
+    <link rel="icon" type="image/x-icon" href="/images/logn_icon.ico">
+    <link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/animate.min.css">
+<script src="js/swiper.min.js"></script>
+<script src="js/swiper.animate.min.js"></script>
+    <link rel="stylesheet" href="css/brands.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/liaojie-detail.css">
+
+</head>
+
+<body class="body">
+<div  class="nav-back-wrap">
+    <a class="nav-back" href="/banner/index.html">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <i class="fa fa-angle-double-left"></i>返回
+    </a>
+</div>
+<div class="top-nav">
+    <span>基础信息</span>
+</div>
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+    <!-------------slide1----------------->
+        <section class="swiper-slide swiper-slide1">
+            <div class="gongneng" style="width: 60%">
+                <ul>
+                    <li style="width: 40%" class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration=".5s" swiper-animate-delay="0" >
+                        <p class="p1">
+                            <span>
+                                <img src="images/ljie01.png"></span></p>
+                        <p class="p2"><span class="s1">管网地理</span><br><span class="s2">标准数据对齐，实时空间定位，地理环境标定，全域信息管理。</span></p>
+                    </li>
+                    <li style="width: 20%" class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration=".5s" swiper-animate-delay="0.1s" ><img src="images/ljie01-01.png"></li>
+                    <li style="width: 40%" class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration=".5s" swiper-animate-delay="0.2s" >
+                        <p class="p1">
+                            <span>
+                                <img src="images/ljie02.png"></span></p>
+                        <p class="p2"><span class="s1">基础数据</span><br><span class="s2">全生命周期信息支持，完整数据管理，标准化信息支撑，灵活数据调取。</span></p>
+                    </li>
+
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+  <div class="swiper-pagination"></div>
+</div>
+
+
+<script>
+
+scaleW=window.innerWidth/320;
+scaleH=window.innerHeight/480;
+var resizes = document.querySelectorAll('.resize');
+          for (var j=0; j<resizes.length; j++) {
+           resizes[j].style.width=parseInt(resizes[j].style.width)*scaleW+'px';
+		   resizes[j].style.height=parseInt(resizes[j].style.height)*scaleH+'px';
+		   resizes[j].style.top=parseInt(resizes[j].style.top)*scaleH+'px';
+		   resizes[j].style.left=parseInt(resizes[j].style.left)*scaleW+'px';
+          }
+
+  var mySwiper = new Swiper ('.swiper-container', {
+   direction : 'vertical',
+   pagination: '.swiper-pagination',
+  //virtualTranslate : true,
+   mousewheelControl : true,
+      paginationClickable: true,
+   onInit: function(swiper){
+   swiperAnimateCache(swiper);
+   swiperAnimate(swiper);
+	  },
+   onSlideChangeEnd: function(swiper){
+	swiperAnimate(swiper);
+    },
+	onTransitionEnd: function(swiper){
+	swiperAnimate(swiper);
+    },
+
+
+	watchSlidesProgress: true,
+
+      onProgress: function(swiper){
+        for (var i = 0; i < swiper.slides.length; i++){
+          var slide = swiper.slides[i];
+          var progress = slide.progress;
+          var translate = progress*swiper.height/4;
+		  scale = 1 - Math.min(Math.abs(progress * 0.5), 1);
+          var opacity = 1 - Math.min(Math.abs(progress/2),0.5);
+          slide.style.opacity = opacity;
+		  es = slide.style;
+		  es.webkitTransform = es.MsTransform = es.msTransform = es.MozTransform = es.OTransform = es.transform = 'translate3d(0,'+translate+'px,-'+translate+'px) scaleY(' + scale + ')';
+
+        }
+      },
+
+	   onSetTransition: function(swiper, speed) {
+        for (var i = 0; i < swiper.slides.length; i++){
+          es = swiper.slides[i].style;
+		  es.webkitTransitionDuration = es.MsTransitionDuration = es.msTransitionDuration = es.MozTransitionDuration = es.OTransitionDuration = es.transitionDuration = speed + 'ms';
+
+        }
+      },
+	   })
+  </script>
+</body>
+</html>
