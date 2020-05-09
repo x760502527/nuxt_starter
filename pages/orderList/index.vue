@@ -7,15 +7,16 @@
         <!--<div class="pipeline_list">
             <div class="pipeline">131</div>
         </div>-->
-        <div style="padding:5px 60px 20px 60px;height: 100px;position: absolute;width: calc(100% - 120px);top: 0;">
-            <div style="float:left">
-<!--                <iframe v-if="weatherShow" id="iframe1" allowtransparency="true" frameborder="0" width="180"-->
-<!--                        height="36" scrolling="no"-->
-<!--                        src="//tianqi.2345.com/plugin/widget/index.htm?s=3&z=2&t=0&v=0&d=3&bd=0&k=000000&f=ffffff&ltf=ffffff&htf=ffffff&q=1&e=1&a=0&c=61073&w=180&h=36&align=center"></iframe>-->
-<!--                <img @load="w2" style="display: none;" alt="2345天气预报" :src="testImg">-->
-                <!--<iframe style="position: absolute;left:10px;" allowtransparency="true" frameborder="0" width="180"
-                        height="30" scrolling="no"
-                        src="//tianqi.2345.com/plugin/widget/index.htm?s=3&amp;z=2&amp;t=0&amp;v=0&amp;d=3&amp;bd=0&amp;k=&amp;f=ffffff&amp;ltf=ffffff&amp;htf=ffffff&amp;q=1&amp;e=1&amp;a=1&amp;c=54511&amp;w=180&amp;h=30&amp;align=center"></iframe>-->
+        <div style="padding: 5px 40px;height: 100px;position: absolute;width: calc(100%);top: 0;">
+            <div style="float:left;margin-top: 10px;">
+                <a @click="back()" style="font-size:12px;color: #08dbe3;"> << 返回</a>
+            </div>
+            <div style="float:right;margin-top: 10px;">
+                <span style="font-size: 12px;"><v-icon style="color:#03B7C9;margin-top: -2px;">mdi-account</v-icon>欢迎您，{{username}}</span>
+                <span @click="goHome()" class="exit" style="font-size: 12px;cursor: pointer;margin-left: 10px;"><v-icon
+                        style="color:#03B7C9;margin-top: -2px;">mdi-home</v-icon>主页</span>
+                <span @click="logout()" class="exit" style="font-size: 12px;margin-left: 10px;cursor: pointer;"><v-icon
+                        style="color:#03B7C9;margin-top: -2px;">mdi-power</v-icon>退出</span>
             </div>
         </div>
         <div style="height: calc(100% - 100px);width: 100%;margin-top:100px;padding:20px;position: relative;">
@@ -203,6 +204,9 @@
             testImg() {
                 return 'http://tianqi.2345.com/theme2/img/logo160722.png?' + moment().valueOf()
             },
+            username() {
+                return this.$store.state['user']['userName']
+            },
         },
         async asyncData({$axios, callback}) {
 
@@ -211,6 +215,29 @@
             this.getData();
         },
         methods: {
+            back() {
+                this.$router.back(-1)
+            },
+            goHome() {
+                window.location = '/home'
+            },
+            logout() {
+                this.$Modal.confirm({
+                    title: '退出登录',
+                    content: '是否确定退出登录？',
+                    onOk: () => {
+                        apiService.logout();
+                        Cookie.remove('token');
+                        Cookie.remove('user');
+                        this.$store.commit('user', null)
+                        this.$store.commit('token', null)
+                        window.location = '/login';
+                    },
+                    onCancel: () => {
+
+                    }
+                });
+            },
             w2() {
                 this.weatherShow = true
             },
@@ -292,6 +319,12 @@
         left: 50%;
         top: 4.3%;
         font-size: 26px;
+    }
+
+    .exit {
+        &:hover {
+            color: rgb(2, 203, 205);
+        }
     }
 
     .dxcr_container {

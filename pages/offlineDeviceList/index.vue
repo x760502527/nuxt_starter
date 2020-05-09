@@ -7,15 +7,16 @@
         <!--<div class="pipeline_list">
             <div class="pipeline">131</div>
         </div>-->
-        <div style="padding:5px 60px 20px 60px;height: 100px;position: absolute;width: calc(100% - 120px);top: 0;">
-            <div style="float:left">
-<!--                <iframe v-if="weatherShow" id="iframe1" allowtransparency="true" frameborder="0" width="180"-->
-<!--                        height="36" scrolling="no"-->
-<!--                        src="//tianqi.2345.com/plugin/widget/index.htm?s=3&z=2&t=0&v=0&d=3&bd=0&k=000000&f=ffffff&ltf=ffffff&htf=ffffff&q=1&e=1&a=0&c=61073&w=180&h=36&align=center"></iframe>-->
-                <!--                <img @load="w2" style="display: none;" alt="2345天气预报" :src="testImg">-->
-                <!--<iframe style="position: absolute;left:10px;" allowtransparency="true" frameborder="0" width="180"
-                        height="30" scrolling="no"
-                        src="//tianqi.2345.com/plugin/widget/index.htm?s=3&amp;z=2&amp;t=0&amp;v=0&amp;d=3&amp;bd=0&amp;k=&amp;f=ffffff&amp;ltf=ffffff&amp;htf=ffffff&amp;q=1&amp;e=1&amp;a=1&amp;c=54511&amp;w=180&amp;h=30&amp;align=center"></iframe>-->
+        <div style="padding: 5px 40px;height: 100px;position: absolute;width: calc(100%);top: 0;">
+            <div style="float:left;margin-top: 10px;">
+                <a @click="back()" style="font-size:12px;color: #08dbe3;"> << 返回</a>
+            </div>
+            <div style="float:right;margin-top: 10px;">
+                <span style="font-size: 12px;"><v-icon style="color:#03B7C9;margin-top: -2px;">mdi-account</v-icon>欢迎您，{{username}}</span>
+                <span @click="goHome()" class="exit" style="font-size: 12px;cursor: pointer;margin-left: 10px;"><v-icon
+                        style="color:#03B7C9;margin-top: -2px;">mdi-home</v-icon>主页</span>
+                <span @click="logout()" class="exit" style="font-size: 12px;margin-left: 10px;cursor: pointer;"><v-icon
+                        style="color:#03B7C9;margin-top: -2px;">mdi-power</v-icon>退出</span>
             </div>
         </div>
         <div style="height: calc(100% - 100px);width: 100%;margin-top:100px;padding:20px;position: relative;">
@@ -25,7 +26,8 @@
                     <div class="handle-box">
                         <div class="dxcr_op">
                             <span class="dxcr_label">设备名称:</span>
-                            <el-select class="dxcr_input"   ref="netValue" v-model="deviceValue" size="small" clearable placeholder="请选择">
+                            <el-select class="dxcr_input" ref="netValue" v-model="deviceValue" size="small" clearable
+                                       placeholder="请选择">
                                 <el-option
                                         v-for="item in deviceOptions"
                                         :key="item.equipmentId"
@@ -53,7 +55,8 @@
                         </div>
                         <div class="dxcr_op">
                             <span class="dxcr_label">设备状态：</span>
-                            <el-select class="dxcr_input" size="small"   ref="netValue" v-model="netValue"  clearable placeholder="请选择">
+                            <el-select class="dxcr_input" size="small" ref="netValue" v-model="netValue" clearable
+                                       placeholder="请选择">
                                 <el-option
                                         v-for="item in netOptions"
                                         :key="item.value"
@@ -63,7 +66,8 @@
                             </el-select>
                         </div>
                         <div class="dxcr_op">
-                            <el-button size="small" type="primary" icon="el-icon-search" @click="submitDevice">搜索</el-button>
+                            <el-button size="small" type="primary" icon="el-icon-search" @click="submitDevice">搜索
+                            </el-button>
                         </div>
                     </div>
                     <el-table
@@ -117,11 +121,11 @@
                     pageIndex: 1,
                     pageSize: 10
                 },
-                dataParams:{
-                    deviceParams:'',
-                    startParams:'',
-                    endParams:'',
-                    netStateParams:'',
+                dataParams: {
+                    deviceParams: '',
+                    startParams: '',
+                    endParams: '',
+                    netStateParams: '',
                 },
                 tableData: [],
                 tableDataR: [],
@@ -181,21 +185,51 @@
             this.getOnlineList();
         },
         mounted() {
-            this.getCheckData("","","","",1);
+            this.getCheckData("", "", "", "", 1);
+        },
+        computed: {
+            testImg() {
+                return 'http://tianqi.2345.com/theme2/img/logo160722.png?' + moment().valueOf()
+            },
+            username() {
+                return this.$store.state['user']['userName']
+            },
         },
         methods: {
+            back() {
+                this.$router.back(-1)
+            },
+            goHome() {
+                window.location = '/home'
+            },
+            logout() {
+                this.$Modal.confirm({
+                    title: '退出登录',
+                    content: '是否确定退出登录？',
+                    onOk: () => {
+                        apiService.logout();
+                        Cookie.remove('token');
+                        Cookie.remove('user');
+                        this.$store.commit('user', null)
+                        this.$store.commit('token', null)
+                        window.location = '/login';
+                    },
+                    onCancel: () => {
 
+                    }
+                });
+            },
             //获取设备列表
-            async getOnlineList(){
+            async getOnlineList() {
                 let pipelineID = this.$route.query.pipelineId;//"66fbd60b3c1f4444bd969088cb8805de";
-                let  data  = await apiService.getOnlineList({pipelineID});
+                let data = await apiService.getOnlineList({pipelineID});
                 this.deviceOptions = data.data;
             },
 
             // 获取带筛选条件的的数据
-            async getCheckData(devices,starts,ends,netstats,pages) {
-                console.log("starts："+starts+",ends："+ends+",netstats："+netstats+",pages:"+pages);
-                let deviceId =devices;
+            async getCheckData(devices, starts, ends, netstats, pages) {
+                console.log("starts：" + starts + ",ends：" + ends + ",netstats：" + netstats + ",pages:" + pages);
+                let deviceId = devices;
                 let deviceState = netstats;
                 let pipelineId = this.$route.query.pipelineId;//"66fbd60b3c1f4444bd969088cb8805de";
                 let pageNumber = pages;
@@ -208,7 +242,6 @@
                 let data = await apiService.onlineNetRecord({
                     deviceId, deviceState, pipelineId, startTime, endTime, pageNumber, pageSize
                 })
-                console.log(data.data);
 
                 this.tableData = data.data;
                 this.tableDataR = data.data;
@@ -220,28 +253,26 @@
             handleAdd() {
                 this.addVisible = true
             },
-            submitDevice(){
-                    console.log("选择的设备："+this.deviceValue+",选择的日期："+this.datePickers+",选择的设备状态："+this.netValue);
-                    if(this.datePickers && this.datePickers.length>0){
-                        let start = this.datePickers[0];
-                        let end = this.datePickers[1];
-                        this.dataParams.deviceParams = this.deviceValue;
-                        this.dataParams.startParams = start;
-                        this.dataParams.endParams = end;
-                        this.dataParams.netStateParams = this.netValue;
-                    }else {
-                        let start = '';
-                        let end = '';
-                        this.dataParams.deviceParams = this.deviceValue;
-                        this.dataParams.startParams = start;
-                        this.dataParams.endParams = end;
-                        this.dataParams.netStateParams = this.netValue;
-                    }
+            submitDevice() {
+                console.log("选择的设备：" + this.deviceValue + ",选择的日期：" + this.datePickers + ",选择的设备状态：" + this.netValue);
+                if (this.datePickers && this.datePickers.length > 0) {
+                    let start = this.datePickers[0];
+                    let end = this.datePickers[1];
+                    this.dataParams.deviceParams = this.deviceValue;
+                    this.dataParams.startParams = start;
+                    this.dataParams.endParams = end;
+                    this.dataParams.netStateParams = this.netValue;
+                } else {
+                    let start = '';
+                    let end = '';
+                    this.dataParams.deviceParams = this.deviceValue;
+                    this.dataParams.startParams = start;
+                    this.dataParams.endParams = end;
+                    this.dataParams.netStateParams = this.netValue;
+                }
 
 
-                this.getCheckData( this.dataParams.deviceParams,this.dataParams.startParams ,this.dataParams.endParams,this.dataParams.netStateParams,1)
-
-
+                this.getCheckData(this.dataParams.deviceParams, this.dataParams.startParams, this.dataParams.endParams, this.dataParams.netStateParams, 1)
 
 
             },
@@ -257,13 +288,13 @@
             // 分页导航
             handlePageChange(val) {
                 this.$set(this.query, 'pageIndex', val);
-                this.getCheckData( this.dataParams.deviceParams,this.dataParams.startParams ,this.dataParams.endParams,this.dataParams.netStateParams,this.query.pageIndex )
+                this.getCheckData(this.dataParams.deviceParams, this.dataParams.startParams, this.dataParams.endParams, this.dataParams.netStateParams, this.query.pageIndex)
             }
         }
     };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
     .dxcr_list {
 
@@ -334,12 +365,18 @@
         height: 40px;
     }
 
+    .exit {
+        &:hover {
+            color: rgb(2, 203, 205);
+        }
+    }
 
 </style>
 <style lang="scss">
     .dxcr_list {
         background-image: url("/images/liebiao.png");
         background-size: 100% 100%;
+
         .el-pager {
             padding-left: 0px;
         }

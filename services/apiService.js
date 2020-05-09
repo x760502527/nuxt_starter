@@ -7,7 +7,8 @@ import global from '@/plugins/global'
 //基本路径
 //是开发环境是代理为真路径为"" 否则是 nuxtConfig.axios.baseURL
 let NODE_ENV = process.env.NODE_ENV
-let path = NODE_ENV === 'development' ? nuxtConfig.axios.proxy ? "/api" : "/api1" : "/api1"
+// let path = NODE_ENV === 'development' ? nuxtConfig.axios.proxy ? "/api" : "/api1" : "/api1"
+let path ="/api1"
 
 let apiService = {
     baidu(){
@@ -19,7 +20,7 @@ let apiService = {
         })
     },
     configJson(){
-        return process.env.properties
+        return process.env.properties || {}
     },
     login(params){
         return new Promise((resolve, reject) => {
@@ -55,7 +56,37 @@ let apiService = {
     },
     alarms(params){
         return new Promise((resolve, reject) => {
-            axios.get( path + `/datacenter/bigScreen/realtimeAlarmsListWithPosition`,{
+            axios.get( path + `/datacenter/bigScreen/realtimeAlarmsList`,{
+                params
+            }).then((value => {
+                let datas = value['data']
+                resolve(datas)
+            }))
+        })
+    },
+    findAllDept(params){
+        return new Promise((resolve, reject) => {
+            axios.get( path + `/datacenter/bigScreen/findAllDept`,{
+                params
+            }).then((value => {
+                let datas = value['data']
+                resolve(datas)
+            }))
+        })
+    },
+    deviceBaseInfo(params){
+        return new Promise((resolve, reject) => {
+            axios.get( path + `/datacenter/bigScreen/deviceBaseInfo`,{
+                params
+            }).then((value => {
+                let datas = value['data']
+                resolve(datas)
+            }))
+        })
+    },
+    findPipelineByDeptId(params){
+        return new Promise((resolve, reject) => {
+            axios.get( path + `/datacenter/bigScreen/getPipelineCount`,{
                 params
             }).then((value => {
                 let datas = value['data']

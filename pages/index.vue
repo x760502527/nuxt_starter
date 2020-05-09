@@ -2,7 +2,7 @@
     <div class="index" style="position: relative;" @mouseup="mouseup">
         <div class="index_bg"></div>
         <div class="login_title">
-            管道动态监测
+            {{pipeline.pipelineDeptName}}管道动态监测
         </div>
         <!--<div class="pipeline_list">
             <div class="pipeline">131</div>
@@ -30,11 +30,17 @@
                 <div style="height:40%;width: 75%;position: absolute;padding:0px 20px 20px 0px;">
                     <div style="height:40px;line-height: 40px;"
                          class="index_title">
-                        <div style="float:left;background-image: url('/images/baojingtongji-nav.png');background-size: 100% 100%;width:120px;">
-                            管道鱼骨图
+                        <div style="float:left;background-image: url('/images/baojingtongji-nav.png');background-size: 100% 100%;width:100px;">
+                            <div style="float:left;margin-left: 0px;">管道鱼骨图</div>
                         </div>
-                        <div style="float:right;font-size: 14px;" v-if="pipelines.length>1">
-                            <div  :title="item['pipelineName']"
+                        <div style="float:left;margin-left: 10px;color:rgb(128,168,171)">
+                                <span @click="goGIS()" style="cursor: pointer">
+                                    <v-icon style="color:#03B7C9;margin-top: -2px;color:rgb(70,97,107)">mdi-map-marker</v-icon>
+                                </span>
+                        </div>
+                        <!--改成下拉框-->
+                        <!--<div style="float:right;font-size: 14px;" v-if="pipelines.length>1">
+                            <div :title="item['pipelineName']"
                                  style="white-space: nowrap;text-overflow:ellipsis;overflow: hidden;padding: 0px 5px;"
                                  v-for="(item,index) in pipelines" :key="item.pipelineId" class="pipeline"
                                  :class="{active1:pipeline['pipelineId']===item['pipelineId'],alarmPP:item['alarm']}"
@@ -44,6 +50,20 @@
                                     {{item['alarmCount']}}
                                 </div>
                             </div>
+                        </div>-->
+                        <div style="float:right">
+                            <Select v-model="currentDeptmentId" style="width:140px;margin-right: 10px;" placeholder="单位选择">
+                                <Option v-for="(item,index) in deptments" :key="item.pipelineDeptId" :value="item.pipelineDeptId" :label="item.pipelineDeptName" >
+                                    <span>{{item.pipelineDeptName}}</span>
+                                </Option>
+                            </Select>
+                            <Select v-model="currentPipelineId" style="width:140px" placeholder="管道选择">
+                                <Option v-for="(item,index) in choosePipelines" :key="item.pipelineId" :value="item.pipelineId" :label="item.pipelineName" >
+                                    <span>{{item.pipelineName}}</span>
+                                    <span v-if="item.totle > 0" style="float:right;color:#f00;font-weight: bolder;">{{item.totle}}</span>
+                                    <span v-else style="float:right;color:rgb(11,179,46);font-weight: bolder;">{{item.totle}}</span>
+                                </Option>
+                            </Select>
                         </div>
                     </div>
                     <!--<div style="height:40px;line-height: 40px;background-image: url('/images/yugu-nav.png');background-size: 100% 100%;"
@@ -195,6 +215,243 @@
                 <div style="width:25%;height:30%;position: absolute;top:40%;padding-bottom: 10px;padding-right:10px;">
                     <div style="=padding: 0 10px;height: 100%;width: 100%;">
                         <div style="height:40px;line-height: 40px;background-image: url('/images/wanzhengxing-nav.png');background-size: 100% 100%;"
+                             class="index_title">
+                            实时数据
+                        </div>
+                        <div style="height:calc(100% - 40px);padding-top:10px;">
+                            <div style="height:calc(100%);">
+                                <v-row style="height: 50%;" no-gutters>
+                                    <v-col>
+                                        <div class="sssj">
+                                            <div class="sssj_text">温度<br>℃</div>
+                                            <div class="sssj_num_container">
+                                                <v-row no-gutters>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.tempIn,5)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.tempIn,4)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.tempIn,3)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.tempIn,2)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.tempIn,1)}}
+                                                        </div>
+                                                    </v-col>
+                                                </v-row>
+                                            </div>
+                                            <div class="sssj_num_container_1">
+                                                <v-row no-gutters>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.tempOut,5)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.tempOut,4)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.tempOut,3)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.tempOut,2)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.tempOut,1)}}
+                                                        </div>
+                                                    </v-col>
+                                                </v-row>
+                                            </div>
+                                        </div>
+                                    </v-col>
+                                    <v-col class="sssj">
+                                        <div class="sssj">
+                                            <div class="sssj_text">压力<br>MPa</div>
+                                            <div class="sssj_num_container">
+                                                <v-row no-gutters>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.pressIn,5)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.pressIn,4)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.pressIn,3)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.pressIn,2)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.pressIn,1)}}
+                                                        </div>
+                                                    </v-col>
+                                                </v-row>
+                                            </div>
+                                            <div class="sssj_num_container_1">
+                                                <v-row no-gutters>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.pressOut,5)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.pressOut,4)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.pressOut,3)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.pressOut,2)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.pressOut,1)}}
+                                                        </div>
+                                                    </v-col>
+                                                </v-row>
+                                            </div>
+                                        </div>
+                                    </v-col>
+                                </v-row>
+                                <v-row style="height: 50%;" no-gutters>
+                                    <v-col class="sssj">
+                                        <div class="sssj">
+                                            <div class="sssj_text">流量<br>L</div>
+                                            <div class="sssj_num_container">
+                                                <v-row no-gutters>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.ovalIn,5)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.ovalIn,4)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.ovalIn,3)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.ovalIn,2)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.ovalIn,1)}}
+                                                        </div>
+                                                    </v-col>
+                                                </v-row>
+                                            </div>
+                                            <div class="sssj_num_container_1">
+                                                <v-row no-gutters>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.ovalIn,5)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.ovalIn,4)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.ovalIn,3)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.ovalIn,2)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.ovalIn,1)}}
+                                                        </div>
+                                                    </v-col>
+                                                </v-row>
+                                            </div>
+                                        </div>
+                                    </v-col>
+                                    <v-col class="sssj">
+                                        <div class="sssj">
+                                            <div class="sssj_text" style="top:40px;">输差</div>
+                                            <div class="sssj_num_container" style="top: 38px;">
+                                                <v-row no-gutters>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.ovalOut,5)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.ovalOut,4)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.ovalOut,3)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.ovalOut,2)}}
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col>
+                                                        <div class="sssj_num">
+                                                            {{ct(this.ovalOut,1)}}
+                                                        </div>
+                                                    </v-col>
+                                                </v-row>
+                                            </div>
+                                        </div>
+                                    </v-col>
+                                </v-row>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div style="=padding: 0 10px;height: 100%;width: 100%;">
+                        <div style="height:40px;line-height: 40px;background-image: url('/images/wanzhengxing-nav.png');background-size: 100% 100%;"
                              class="index_title">完整性评估
                         </div>
                         <div style="height:calc(100% - 40px);padding-top:10px;">
@@ -225,8 +482,8 @@
                                         </v-btn>
                                     </div>
                                 </div>
-                                <!-- old version-->
-                                <!--<div style="width: 50%;height: 100%;position: relative;float: left;">
+                                &lt;!&ndash; old version&ndash;&gt;
+                                &lt;!&ndash;<div style="width: 50%;height: 100%;position: relative;float: left;">
                                     <v-chart ref="monitorChart1" autoresize :options="monitorChartOption"></v-chart>
                                     <div class="monitorRate">
                                         <span class="monitorRate_num">{{rate}}</span>
@@ -261,10 +518,10 @@
                                             <span style="margin-left:5px;font-size: 16px;margin-top: 5px;">管理覆盖率</span>
                                         </div>
                                     </div>
-                                </div>-->
+                                </div>&ndash;&gt;
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
                 <div style="width: 25%; height: 30%;position: absolute;top: 70%;padding-top:10px;padding-right:10px;">
                     <div style="height:40px;line-height: 40px;" class="index_title">
@@ -449,7 +706,7 @@
                         </div>
                         <div style="height:calc(100% - 40px);position: relative">
                             <v-chart ref="centerLineChart" autoresize :options="centerLineChartOption"></v-chart>
-                            <div style="position: absolute;right: -20px; bottom: 10%; font-size: 12px;">(公里)</div>
+                            <div style="position: absolute;right: -20px; bottom: 14%; font-size: 12px;">(公里)</div>
                         </div>
                     </div>
                 </div>
@@ -557,7 +814,9 @@
     const Cookie = process.client ? require('js-cookie') : undefined
     export default {
         async asyncData({$axios, callback}) {
-
+            let p = process.env['properties'] || {}
+            let address_back = p['address_back']
+            return {address_back: address_back}
         },
         async mounted() {
             await this.getData()
@@ -583,6 +842,7 @@
             },
             rtData() {
                 this.intervalRtData = setInterval(() => {
+                    this.deviceBaseInfo()
                     this.realtimeAlarmTop2()
                     this.alarmsCountDisposed();
                     this.getOnlineList();
@@ -593,8 +853,9 @@
                 }, 10000)
             },
             async getData() {
-                this.getConfig()
                 await this.fishbone();
+                this.findAllDept();
+                this.deviceBaseInfo()
                 this.alarmsCountDisposed();
                 this.getOnlineList();
                 this.getPipelineCount();
@@ -621,6 +882,37 @@
                     }
                 }
             },
+            async findAllDept() {
+                const datas = await apiService.findAllDept()
+                let data = datas['data']
+                this.deptments = data
+                if(this.deptments && this.deptments.length > 0){
+                    this.currentDeptmentId = this.deptments[0]['pipelineDeptId']
+                }
+            },
+            async findPipelineByDeptId() {
+                const datas = await apiService.findPipelineByDeptId({
+                    deptId : this.currentDeptmentId
+                })
+                let data = datas['data']
+                this.choosePipelines = data
+                if(this.choosePipelines && this.choosePipelines.length > 0){
+                    this.currentPipelineId = this.choosePipelines[0]['pipelineId']
+                }
+
+            },
+            async deviceBaseInfo() {
+                const datas = await apiService.deviceBaseInfo()
+                let data = datas['data']
+                this.ovalDiff = data['ovalDiff']
+                this.ovalIn = data['ovalIn']
+                this.ovalOut = data['ovalOut']
+                this.pressIn = data['pressIn']
+                this.pressOut = data['pressOut']
+                this.tempIn = data['tempIn']
+                this.tempOut = data['tempOut']
+                console.log(data)
+            },
             async clickPipeline(item) {
                 this.pipeline = item
                 this.getData()
@@ -628,12 +920,15 @@
             async isOnline() {
                 const datas = await apiService.baidu()
             },
-            async getConfig() {
-                const datas = apiService.configJson()
-                this.address_back = datas['address_back']
-            },
             async getRtData() {
-                let interval = parseInt(this.pipeline['pipelineLength'] / 1000)
+                let cha = 1000
+                if(this.pipeline['pipelineLength'] < 40000){
+                    cha = 50
+                    this.centerLineChartOption.xAxis[0].axisLabel.interval = 1
+                }else{
+                    this.centerLineChartOption.xAxis[0].axisLabel.interval = 50
+                }
+                let interval = parseInt(this.pipeline['pipelineLength'] / cha)
                 const result = await Promise.all([apiService.getRealTimeFitValue({
                     pipelineId: this.pipeline['pipelineId'],
                     intervalValue: interval
@@ -655,7 +950,7 @@
                 let xData = rtuData['datasPipelineLocation'] || temperature['datasPipelineLocation'] || vibration['datasPipelineLocation']
                 //改成公里
                 xData = xData.map((v) => {
-                    return Math.ceil(v / 1000)
+                    return (v / 1000).toFixed(1)
                 })
                 this.centerLineChartOption.xAxis[0].data = xData
                 this.centerLineChartOption.series[0].data = temperature['datasValueFormat']
@@ -945,7 +1240,7 @@
                     });
                     return
                 }
-                if(!this.submitflag){
+                if (!this.submitflag) {
                     return
                 }
 
@@ -988,7 +1283,7 @@
                 }
             },
             goHome() {
-                window.location = '/banner/index.html'
+                window.location = '/home'
             },
             logout() {
                 this.$Modal.confirm({
@@ -1036,7 +1331,11 @@
                 let alarmValue = alarm['alarmValue']
                 let userId = this.$store.state['user']['userId']
 
-                window.open(this.address_back + `/AWelcome?alarmId=${id}&userId=${userId}`)
+                window.location = this.address_back + `/AWelcome?alarmId=${id}&userId=${userId}`
+            },
+            goGIS(){
+                let userId = this.$store.state['user']['userId']
+                window.location = this.address_back + `/AWelcome?userId=${userId}`
             },
             offlineLeft() {
                 let left = 184
@@ -1116,13 +1415,47 @@
                 }
             },
             open(url) {
-                window.open(`${url}?pipelineId=${this.pipeline['pipelineId']}`)
+                window.location = `${url}?pipelineId=${this.pipeline['pipelineId']}`
+            },
+            m(value){
+                let max=5
+                if(value.length > max){
+                    let str =""
+                    for(let i = 0 ; i < max ; i++){
+                        str +='9'
+                    }
+                    return str
+                }else{
+                    let l = max - value.length
+                    let str =""
+                    for(let i = 0 ; i < l ; i++){
+                        str +='0'
+                    }
+                    return str +=value
+                }
+            },
+            ct(value,w){
+                let pow = Math.pow(10,w)
+                let pow1 = Math.pow(10,w-1)
+                let g=parseInt((value % pow) / pow1)
+                return g
             }
         },
         data() {
             let c = this
             return {
-                submitflag:true,
+                ovalDiff:0,
+                ovalIn:0,
+                ovalOut:0,
+                pressIn:0,
+                pressOut:0,
+                tempIn:0,
+                tempOut:0,
+                deptments:[],
+                choosePipelines:[],
+                currentDeptmentId:'',
+                currentPipelineId:'',
+                submitflag: true,
                 eqStateList: [],
                 showFXPGModel: false,
                 showGHGQModel: false,
@@ -1134,7 +1467,6 @@
                 remarks: '',
                 pipelines: [],
                 weatherShow: false,
-                address_back: '',
                 max1: 100,
                 max2: 100,
                 max3: 100,
@@ -1290,19 +1622,19 @@
                             let p = params[0]
                             let p1 = params[1]
                             let p2 = params[2]
-                            let str=""
-                            if(p){
+                            let str = ""
+                            if (p) {
                                 let x = params[0]['axisValue'] + '公里'
                                 let x1 = params[0]['marker'] + params[0]['seriesName'] + ":" + c.temperature['datasValue'][params[0]['dataIndex']]
-                                str+=x + "<br/>" + x1
+                                str += x + "<br/>" + x1
                             }
-                            if(p1){
+                            if (p1) {
                                 let x2 = params[1]['marker'] + params[1]['seriesName'] + ":" + c.vibration['datasValue'][params[1]['dataIndex']]
-                                str+="<br/>" + x2
+                                str += "<br/>" + x2
                             }
-                            if(p2){
+                            if (p2) {
                                 let x3 = params[2]['marker'] + params[2]['seriesName'] + ":" + c.rtuData['datasValue'][params[2]['dataIndex']]
-                                str+="<br/>" + x3
+                                str += "<br/>" + x3
                             }
 
                             return str
@@ -1350,6 +1682,7 @@
                             },
                         },
                         axisLabel: {
+                            interval:50,
                             color: '#fff'
                         },
                         splitLine: {
@@ -1363,6 +1696,7 @@
                         },
                         boundaryGap: false,
                         data: [0, 1],
+                        // interval:10,
                         /*interval: 10,
                         nameLocation: 'end',
                         nameGap: 10,
@@ -2092,6 +2426,18 @@
             }
         },
         watch: {
+            currentPipelineId(value){
+                console.log(value)
+                for(let item of this.pipelines){
+                    let id = item['pipelineId']
+                    if (id == this.currentPipelineId){
+                        this.clickPipeline(item)
+                    }
+                }
+            },
+            currentDeptmentId(value){
+              this.findPipelineByDeptId(value)
+            },
             rate(value) {
                 this.monitorChartOption.series[0].data[0].value = value
                 this.monitorChartOption.series[0].data[1].value = 100 - value
@@ -2102,6 +2448,14 @@
                 return {
                     transform: `scale(${this.scalc}) translateX(${this.offsetX}px)`
                 }
+            },
+            deptmentName(){
+                // for(let item of this.deptments){
+                //     let id = item['pipelineDeptId']
+                //     if(this.currentDeptmentId == id){
+                //         return item['pipelineDeptName']
+                //     }
+                // }
             },
             testImg() {
                 return 'http://tianqi.2345.com/theme2/img/logo160722.png?' + moment().valueOf()
@@ -2184,6 +2538,47 @@
             z-index: 999;
             transform: translateX(100%) translateY(-75%);
             right: 0;
+        }
+
+        .sssj{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-image: url('/images/mbbg.png');
+            background-position: center center;
+        }
+
+        .sssj_text{
+            position: absolute;
+            left: 40px;
+            font-size: 14px;
+            top: 35px;
+            line-height: 16px;
+            text-align: center;
+            color: rgb(7,174,196);
+        }
+
+        .sssj_num_container{
+            position: absolute;
+            width: 100px;
+            left: 93px;
+            top: 25px;
+            color:#10ebfc;
+        }
+
+        .sssj_num_container_1{
+            position: absolute;
+            width: 100px;
+            left: 93px;
+            top: 53px;
+            color:#ff0000;
+        }
+
+        .sssj_num{
+            width: 16px;
+            margin: auto;
+            text-align: center;
+            background: rgba(0,0,0,.6);
         }
 
         .more {
@@ -2928,12 +3323,33 @@
             background: none !important;
         }
 
+        .ivu-select{
+            color:rgb(16,231,239)!important;
+        }
+
+        .ivu-select-arrow{
+            color:rgb(36,125,230)!important;
+        }
+
         .ivu-select-not-found {
             padding-left: 0px !important;
         }
 
+        .ivu-select-item{
+            color:rgb(16,231,239)!important;
+        }
+
+        .ivu-select-item:hover{
+            background:#0d7ade!important;
+        }
+
+        .ivu-select-item-focus{
+            background:#0d7ade!important;
+        }
+
         .ivu-select-selection {
-            background: url("/images/xiuandian-bg.png");
+            border:1px solid rgb(15,93,177)!important;
+            background: rgb(15,57,115);
             background-size: 100% 100%;
             border: none;
             line-height: 24px;
@@ -2944,8 +3360,12 @@
             text-align: center;
         }
 
+        .ivu-select-dropdown-list{
+            padding-left: 0px!important;
+        }
+
         .ivu-select-dropdown {
-            background-color: #424242;
+            background-color: rgb(16,64,129);
         }
     }
 

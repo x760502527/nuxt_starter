@@ -20,8 +20,6 @@ export const mutations = {
 
 export const actions = {
   nuxtServerInit ({ commit , dispatch}, { req }) {
-    //验证mac
-    // dispatch('core/load')
 
     //登录赋值
     let token = null
@@ -38,7 +36,4 @@ export const actions = {
       commit('user', user)
     }
   },
-  async checkMac({commit}){
-    let data = await apiService.checkMac()
-  }
 }

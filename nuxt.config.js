@@ -1,15 +1,18 @@
 import colors from 'vuetify/es5/util/colors'
 import zhHans from 'vuetify/es5/locale/zh-Hans'
+const env = require('./env')
 
 let NODE_ENV = process.env.NODE_ENV
-let NODE_HTTP = process.env.NODE_HTTP
+let NODE_HTTP = env[process.env.MODE]['NODE_HTTP']|| "http://127.0.0.1:8080"
 
 let BASE_PATH = ''
 if (NODE_ENV === 'generate') {
     BASE_PATH = "./"
 }
+
 export default {
     mode: 'universal',
+    env: env[process.env.MODE],
     /* 'process.env' is environment variable */
     /*
     ** Headers of the page
@@ -25,7 +28,12 @@ export default {
         ],
         link: [
             {rel: 'icon', type: 'image/x-icon', href: '/images/logn_icon.ico'}
-        ]
+        ],
+        script:[{
+            src:'/banner/js/swiper.animate1.0.2.min.js',
+        },{
+            src:'/banner/js/idangerous.swiper2.7.6.min.js'
+        }]
     },
 
     server: {host: "0.0.0.0", port: 3000},
